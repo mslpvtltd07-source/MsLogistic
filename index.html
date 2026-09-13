@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MS Logistics Private Limited — Nepal's trusted partner for packing, warehousing, and worldwide freight. Household relocation, diplomatic moves, customs clearance, and commercial logistics.">
+  <meta name="keywords" content="logistics Nepal, relocation Nepal, freight forwarding, warehousing, customs clearance, packing services, international household relocation, embassy relocation, corporate relocation, air freight, sea freight, MS Logistics, cargo Nepal, cross-border logistics">
+  <meta name="author" content="MS Logistics Private Limited">
+  <meta property="og:title" content="MS Logistics Private Limited | Packing, Warehousing & Worldwide Freight">
+  <meta property="og:description" content="Nepal's trusted partner for packing, warehousing, and worldwide freight. From a single-household move to institutional cargo — handled with precision, care, and zero-damage commitment.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/freight-containers.jpg">
+  <meta name="theme-color" content="#0B1F3A">
+  <title>MS Logistics Private Limited | Packing, Warehousing & Worldwide Freight</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B1F3A'/%3E%3Ctext x='50' y='68' font-family='Poppins,Arial' font-size='52' font-weight='800' fill='white' text-anchor='middle'%3EMS%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__logo">MS<span>Logistics</span></div>
+      <div class="loader__bar">
+        <div class="loader__progress" id="loaderProgress"></div>
+      </div>
+      <p class="loader__text">Moving With Precision...</p>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Page scroll progress"></div>
+
+  <!-- Header -->
+  <header class="header" id="header" role="banner">
+    <div class="container header__container">
+      <a href="index.html" class="header__logo" aria-label="MS Logistics Private Limited Home">
+        <span class="header__logo-icon">&#9670;</span>
+        MS<span>Logistics</span>
+      </a>
+      <nav class="header__nav" id="mainNav" role="navigation" aria-label="Main navigation">
+        <ul class="header__menu">
+          <li><a href="index.html" class="header__link active">Home</a></li>
+          <li><a href="about-us.html" class="header__link">About Us</a></li>
+          <li><a href="services.html" class="header__link">Services</a></li>
+          <li><a href="why-choose-us.html" class="header__link">Why Choose Us</a></li>
+          <li><a href="clients.html" class="header__link">Clients</a></li>
+          <li><a href="gallery.html" class="header__link">Gallery</a></li>
+          <li><a href="contact.html" class="header__link">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="contact.html" class="btn btn--primary header__cta">Work With Us</a>
+      <button class="header__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero Section -->
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="hero__bg-shapes" aria-hidden="true">
+        <div class="hero__shape hero__shape--1"></div>
+        <div class="hero__shape hero__shape--2"></div>
+        <div class="hero__shape hero__shape--3"></div>
+      </div>
+      <div class="hero__logistics-background" aria-hidden="true">
+        <svg class="hero__logistics-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <g class="hero__routes" fill="none" stroke="currentColor" stroke-linecap="round">
+            <path id="logistics-route-main" class="hero__route" d="M-80 690 C150 560 290 700 465 580 S720 365 915 475 S1180 625 1520 410" />
+            <path id="logistics-route-north" class="hero__route" d="M40 165 C255 305 425 110 630 250 S965 160 1215 325 S1375 360 1510 275" />
+            <path id="logistics-route-east" class="hero__route hero__route--optional" d="M805 760 C910 610 1095 690 1165 520 S1320 270 1510 250" />
+            <path id="logistics-route-west" class="hero__route hero__route--optional" d="M-30 390 C175 280 285 425 460 365 S610 325 720 445" />
+            <path id="logistics-route-arc" class="hero__route hero__route--optional" d="M280 825 C420 605 650 735 785 570 S900 325 1090 150" />
+            <path id="logistics-route-link" class="hero__route hero__route--optional" d="M470 580 C520 510 565 455 630 400" />
+          </g>
+          <g class="hero__route-highlights" fill="none" stroke="currentColor" stroke-linecap="round">
+            <path class="hero__route-highlight hero__route-highlight--one" d="M-80 690 C150 560 290 700 465 580 S720 365 915 475 S1180 625 1520 410" />
+            <path class="hero__route-highlight hero__route-highlight--two" d="M40 165 C255 305 425 110 630 250 S965 160 1215 325 S1375 360 1510 275" />
+            <path class="hero__route-highlight hero__route-highlight--three hero__route--optional" d="M805 760 C910 610 1095 690 1165 520 S1320 270 1510 250" />
+          </g>
+          <g class="hero__route-nodes" fill="currentColor">
+            <circle cx="145" cy="620" r="4" />
+            <circle cx="465" cy="580" r="4" />
+            <circle cx="630" cy="250" r="4" />
+            <circle cx="720" cy="445" r="4" />
+            <circle cx="915" cy="475" r="4" />
+            <circle cx="1090" cy="150" r="4" class="hero__route-node--optional" />
+            <circle cx="1165" cy="520" r="4" />
+            <circle cx="1215" cy="325" r="4" class="hero__route-node--optional" />
+          </g>
+          <g class="hero__route-shipments" fill="currentColor">
+            <circle class="hero__route-shipment hero__route-shipment--one" r="4.5">
+              <animateMotion dur="18s" begin="-8s" repeatCount="indefinite" rotate="auto"><mpath href="#logistics-route-main" /></animateMotion>
+            </circle>
+            <circle class="hero__route-shipment hero__route-shipment--two" r="3.5">
+              <animateMotion dur="15s" begin="-3s" repeatCount="indefinite" rotate="auto"><mpath href="#logistics-route-north" /></animateMotion>
+            </circle>
+            <circle class="hero__route-shipment hero__route-shipment--three" r="3.5">
+              <animateMotion dur="20s" begin="-12s" repeatCount="indefinite" rotate="auto"><mpath href="#logistics-route-east" /></animateMotion>
+            </circle>
+          </g>
+        </svg>
+      </div>
+      <div class="container hero__container">
+        <div class="hero__content">
+          <!--<span class="hero__badge fade-up">Available for Work</span>  -->
+          <h1 class="hero__title">
+            <span class="hero__title-accent"> Nepal’s most Trusted Relocation & Logistics Partner</span>
+            <span class="hero__typing" id="heroTyping">Packing.</span>
+            
+          </h1>
+          <p class="hero__desc fade-up delay-2">10+ Years of Verified Market Specialization in Household Goods Packing, Warehousing & Worldwide Multi-Modal Freight</p>
+          <div class="hero__buttons fade-up delay-3">
+            <a href="contact.html" class="btn btn--primary btn--ripple">Work With Us</a>
+            <a href="gallery.html" class="btn btn--outline btn--ripple">View Our Work</a>
+          </div>
+          <div class="hero__trust fade-up delay-4"></div>
+        </div>
+        <div class="hero__visual" id="heroParallax">
+          <div class="hero__image-wrapper">
+            <img src="images/freight-containers.jpg" alt="International freight transport with cargo containers" class="hero__image" loading="eager">
+          </div>
+          <div class="hero__float-card hero__float-card--1 glass">
+            <div class="hero__float-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <strong>7 Provinces</strong>
+            <span>77 Districts + International Coverage</span>
+          </div>
+          <div class="hero__float-card hero__float-card--2 glass">
+            <strong>10+ Years</strong>
+            <span>Verified Market Experience</span>
+          </div>
+          <div class="hero__float-card hero__float-card--3 glass">
+            <strong>Global Mobility</strong>
+            <span>Safe Warehouse Storage</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="stats" id="stats" aria-label="Company statistics">
+      <div class="container stats__container">
+        <div class="stats__item reveal">
+          <span class="stats__number" data-target="10" data-suffix="+">0</span>
+          <span class="stats__label">Years of Operations</span>
+        </div>
+        <div class="stats__item reveal">
+          <span class="stats__number" data-target="7" data-suffix="">0</span>
+          <span class="stats__label">Provinces Covered</span>
+        </div>
+        <div class="stats__item reveal">
+          <span class="stats__number" data-target="77" data-suffix="">0</span>
+          <span class="stats__label">Districts Served</span>
+        </div>
+        <div class="stats__item reveal">
+          <span class="stats__number" data-target="100" data-suffix="%">0</span>
+          <span class="stats__label">Zero-Damage Standard</span>
+        </div>
+        <div class="stats__item reveal">
+          <span class="stats__number" data-target="24" data-suffix="/7">0</span>
+          <span class="stats__label">Response Guarantee</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <section class="process section" id="process" aria-labelledby="process-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">Our Process</span>
+          <h2 class="section__title" id="process-heading">How We Work</h2>
+          <p class="section__desc">A proven six-step process that ensures your shipment is handled with precision, care, and zero-damage commitment.</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline__line" aria-hidden="true"><div class="timeline__line-fill" id="timelineFill"></div></div>
+          <div class="timeline__item reveal">
+            <div class="timeline__number">01</div>
+            <div class="timeline__icon">&#128222;</div>
+            <h3 class="timeline__title">Consultation</h3>
+            <p class="timeline__desc">We assess your shipment scope, timeline, and destination to plan the right logistics approach.</p>
+          </div>
+          <div class="timeline__item reveal">
+            <div class="timeline__number">02</div>
+            <div class="timeline__icon">&#128203;</div>
+            <h3 class="timeline__title">Planning</h3>
+            <p class="timeline__desc">Detailed routing, documentation, and customs coordination across air, sea, and surface modes.</p>
+          </div>
+          <div class="timeline__item reveal">
+            <div class="timeline__number">03</div>
+            <div class="timeline__icon">&#128230;</div>
+            <h3 class="timeline__title">Packing</h3>
+            <p class="timeline__desc">Export-quality packing with professional materials ensuring zero-damage protection.</p>
+          </div>
+          <div class="timeline__item reveal">
+            <div class="timeline__number">04</div>
+            <div class="timeline__icon">&#128666;</div>
+            <h3 class="timeline__title">Transport</h3>
+            <p class="timeline__desc">GPS-equipped fleet and multi-modal freight with real-time tracking from origin to destination.</p>
+          </div>
+          <div class="timeline__item reveal">
+            <div class="timeline__number">05</div>
+            <div class="timeline__icon">&#128203;</div>
+            <h3 class="timeline__title">Customs</h3>
+            <p class="timeline__desc">Direct customs links and seamless cross-border clearance on every shipment.</p>
+          </div>
+          <div class="timeline__item reveal">
+            <div class="timeline__number">06</div>
+            <div class="timeline__icon">&#9989;</div>
+            <h3 class="timeline__title">Delivery</h3>
+            <p class="timeline__desc">Door-to-door delivery with zero-damage verification and client confirmation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video" aria-label="Company video">
+      <div class="video-section__bg">
+        <img src="images/cargo-truck.jpg" alt="" loading="lazy" aria-hidden="true">
+      </div>
+      <div class="video-section__overlay"></div>
+      <div class="container video-section__content reveal">
+        <h2 class="video-section__title">See Our Operations in Action</h2>
+        <p class="video-section__desc">Watch how we move goods across Nepal and the world with precision, care, and zero-damage commitment.</p>
+        <button class="video-section__play" id="videoPlayBtn" aria-label="Play company video">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Video player" hidden>
+      <div class="modal__backdrop" id="videoModalBackdrop"></div>
+      <div class="modal__content">
+        <button class="modal__close" id="videoModalClose" aria-label="Close video">&times;</button>
+        <div class="modal__video-wrapper">
+          <iframe id="videoIframe" src="" title="MS Logistics company video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <section class="team section section--grey" id="team" aria-labelledby="team-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">Leadership</span>
+          <h2 class="section__title" id="team-heading">Meet the Leadership</h2>
+          <p class="section__desc">Our leadership brings over a decade of continuous operational experience to every shipment.</p>
+        </div>
+        <div class="team__grid">
+          <article class="team-card reveal">
+            <div class="team-card__image">
+              <img src="images/logistics-office.jpg" alt="MS Logistics leadership team planning operations" loading="lazy">
+              <div class="team-card__social">
+                <a href="#" aria-label="Executive Chairman on LinkedIn">in</a>
+                <a href="#" aria-label="Executive Chairman on Twitter">X</a>
+              </div>
+            </div>
+            <h3 class="team-card__name">Executive Chairman</h3>
+            <p class="team-card__role">Executive Chairman</p>
+          </article>
+          <article class="team-card reveal">
+            <div class="team-card__image">
+              <img src="images/secure-warehouse.jpg" alt="MS Logistics warehouse operations" loading="lazy">
+              <div class="team-card__social">
+                <a href="#" aria-label="Operations Director on LinkedIn">in</a>
+                <a href="#" aria-label="Operations Director on Twitter">X</a>
+              </div>
+            </div>
+            <h3 class="team-card__name">Operations Director</h3>
+            <p class="team-card__role">Operations Director</p>
+          </article>
+          <article class="team-card reveal">
+            <div class="team-card__image">
+              <img src="images/relocation-packing.jpg" alt="MS Logistics customs documentation process" loading="lazy">
+              <div class="team-card__social">
+                <a href="#" aria-label="Freight Manager on LinkedIn">in</a>
+                <a href="#" aria-label="Freight Manager on Twitter">X</a>
+              </div>
+            </div>
+            <h3 class="team-card__name">Freight Manager</h3>
+            <p class="team-card__role">Freight &amp; Customs</p>
+          </article>
+          <article class="team-card reveal">
+            <div class="team-card__image">
+              <img src="images/relocation-packing-v2.jpg" alt="MS Logistics relocation packing process" loading="lazy">
+              <div class="team-card__social">
+                <a href="#" aria-label="Relocation Lead on LinkedIn">in</a>
+                <a href="#" aria-label="Relocation Lead on Twitter">X</a>
+              </div>
+            </div>
+            <h3 class="team-card__name">Relocation Lead</h3>
+            <p class="team-card__role">Packing &amp; Relocation</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials section" id="testimonials" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">Testimonials</span>
+          <h2 class="section__title" id="testimonials-heading">What Our Clients Say</h2>
+        </div>
+        <div class="testimonials__slider" id="testimonialSlider">
+          <div class="testimonials__track" id="testimonialTrack">
+            <div class="testimonial-slide">
+              <div class="testimonial-slide__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <blockquote class="testimonial-slide__text">"MS Logistics handled our embassy relocation with absolute discretion and precision. Every item arrived without a single scratch. Their zero-damage commitment is real."</blockquote>
+              <div class="testimonial-slide__author">
+                <img src="images/logistics-office.jpg" alt="Diplomatic mission representative" class="testimonial-slide__photo" loading="lazy">
+                <div>
+                  <strong>Diplomatic Mission</strong>
+                  <span>Kathmandu, Nepal</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-slide__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <blockquote class="testimonial-slide__text">"From planning to customs clearance, every step was seamless. Our international household move from Nepal to India was coordinated flawlessly. Highly recommended."</blockquote>
+              <div class="testimonial-slide__author">
+                <img src="images/relocation-packing-v2.jpg" alt="Relocation service client" class="testimonial-slide__photo" loading="lazy">
+                <div>
+                  <strong>Relocating Family</strong>
+                  <span>Kathmandu to New Delhi</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-slide__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <blockquote class="testimonial-slide__text">"We hired MS Logistics for our corporate office relocation. They completed the move ahead of schedule with zero business disruption. The GPS tracking gave us complete visibility."</blockquote>
+              <div class="testimonial-slide__author">
+                <img src="images/cargo-truck.jpg" alt="Corporate logistics client" class="testimonial-slide__photo" loading="lazy">
+                <div>
+                  <strong>Corporate Client</strong>
+                  <span>Lalitpur, Nepal</span>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-slide__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+              <blockquote class="testimonial-slide__text">"Their secure warehousing gave us complete peace of mind. Climate-controlled storage with 24/7 security and full inventory tracking. Simply the best logistics partner in Nepal."</blockquote>
+              <div class="testimonial-slide__author">
+                <img src="images/freight-containers.jpg" alt="International logistics client" class="testimonial-slide__photo" loading="lazy">
+                <div>
+                  <strong>INGO Operations</strong>
+                  <span>Kathmandu, Nepal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonials__controls">
+            <button class="testimonials__btn testimonials__btn--prev" id="testimonialPrev" aria-label="Previous testimonial">&larr;</button>
+            <div class="testimonials__dots" id="testimonialDots" role="tablist" aria-label="Testimonial navigation"></div>
+            <button class="testimonials__btn testimonials__btn--next" id="testimonialNext" aria-label="Next testimonial">&rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq section section--grey" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__tag">FAQ</span>
+          <h2 class="section__title" id="faq-heading">Frequently Asked Questions</h2>
+          <p class="section__desc">Find answers to common questions about our logistics, relocation, and freight services.</p>
+        </div>
+        <div class="faq__list" id="faqList">
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>What areas does MS Logistics cover within Nepal?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>We cover all 7 provinces and 77 districts of Nepal — from Mechi to Mahakali, and across Terai to Mountain regions. Our domestic network ensures door-to-door delivery nationwide.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>Do you handle international shipments?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Yes. We provide global air freight via Tribhuvan International Airport (TIA) and ocean freight via Kolkata and Haldia ports, with full cross-border customs coordination including shipments to India.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>What is your zero-damage commitment?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Our zero-damage standard means absolute accountability and single-point responsibility on every shipment. We use export-quality packing and professional handling to ensure your goods arrive intact.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>Do you provide secure warehousing?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Yes. We operate climate-controlled, GPS-monitored storage hubs in New Baneshwor (Kathmandu) and Balkumari (Lalitpur) with 24/7 security and full inventory tracking.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>Can you handle embassy and diplomatic relocations?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Absolutely. We provide confidential, protocol-aware diplomatic moves with direct customs links and secure, discreet handling trusted by embassies and diplomatic missions.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <button class="faq__question" aria-expanded="false">
+              <span>How can I get a quote or start working with MS Logistics?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq__answer">
+              <p>Simply reach out via our contact form, email us at mslogistic145@gmail.com, or call +977-9801812221 or +977-9840267963. Our team responds 24/7 to coordinate your shipment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="cta" id="cta" aria-labelledby="cta-heading">
+      <div class="cta__shapes" aria-hidden="true">
+        <div class="cta__shape cta__shape--1"></div>
+        <div class="cta__shape cta__shape--2"></div>
+        <div class="cta__shape cta__shape--3"></div>
+      </div>
+      <div class="container cta__container reveal">
+        <h2 class="cta__title" id="cta-heading">Ready to Move With Precision?</h2>
+        <p class="cta__desc">Let's plan your shipment together. Reach out to Nepal's trusted partner for packing, warehousing, and worldwide freight.</p>
+        <a href="contact.html" class="btn btn--white btn--ripple btn--lg">Work With Us</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__col">
+          <a href="index.html" class="footer__logo">MS<span>Logistics</span></a>
+          <p class="footer__desc">Nepal's trusted partner for packing, warehousing, and worldwide freight. Moving with precision and zero-damage commitment for over 10 years.</p>
+          <div class="footer__social">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">ig</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+            <a href="#" aria-label="Twitter">X</a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__title">Quick Links</h4>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="why-choose-us.html">Why Choose Us</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__title">Services</h4>
+          <ul class="footer__links">
+            <li><a href="services.html">Residential</a></li>
+            <li><a href="services.html">International Household Relocation</a></li>
+            <li><a href="services.html">Embassy &amp; Diplomatic Relocation</a></li>
+            <li><a href="services.html">Air &amp; Sea Freight</a></li>
+            <li><a href="services.html">Customs Clearance</a></li>
+            <li><a href="services.html">Secure Warehousing</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__title">Newsletter</h4>
+          <p class="footer__newsletter-text">Subscribe for logistics updates and service news.</p>
+          <form class="footer__newsletter" id="newsletterForm">
+            <input type="email" placeholder="Your email" aria-label="Email for newsletter" required>
+            <button type="submit" aria-label="Subscribe">&#8594;</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 MS Logistics Private Limited. All rights reserved.</p>
+        <button class="footer__top" id="backToTop" aria-label="Back to top">Back To Top &#8593;</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/animation.js" defer></script>
+  <script src="js/counter.js" defer></script>
+  <script src="js/slider.js" defer></script>
+  <script src="js/faq.js" defer></script>
+</body>
+</html>

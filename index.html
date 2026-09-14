@@ -1552,26 +1552,5 @@
   })();
   </script>
 
-  <script>
-  (function () {
-    function init() {
-      var t = document.getElementById('heroTyping');
-      if (!t) return;
-      function clear() {
-        if (t.style.borderRight || t.style.borderRightWidth || t.style.borderRightColor) {
-          t.style.borderRight = '0';
-          t.style.borderRightWidth = '0';
-          t.style.borderRightColor = 'transparent';
-        }
-      }
-      clear();
-      if (window.MutationObserver) {
-        new MutationObserver(clear).observe(t, { attributes: true, attributeFilter: ['style'] });
-      }
-    }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-    else init();
-  })();
-  </script>
 </body>
 </html>

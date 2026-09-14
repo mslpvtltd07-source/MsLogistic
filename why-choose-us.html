@@ -62,22 +62,13 @@
 
     /* --- Band (wide illustration) --- */
     .band { padding-bottom: calc(var(--section-padding) * 0.6); }
-    .close__media svg {
+    .manifest__media svg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       display: block;
     }
-    .close__media img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform var(--transition-slow), opacity var(--transition-slow);
-    }
-    .close__media img.is-missing { opacity: 0; pointer-events: none; }
     .curtain {
       position: absolute;
       inset: 0;
@@ -99,7 +90,7 @@
 
     /* --- Manifest --- */
     .manifest { padding: calc(var(--section-padding) * 0.6) 0; }
-    .manifest__intro { grid-column: 1 / 6; position: sticky; top: 120px; }
+    .manifest__intro { grid-column: 1 / 6; }
     .manifest__title {
       font-size: clamp(1.5rem, 2.6vw, 2.125rem);
       font-weight: 700;
@@ -212,15 +203,6 @@
 
     /* --- Close --- */
     .close { padding: calc(var(--section-padding) * 0.6) 0 var(--section-padding); }
-    .close__media {
-      grid-column: 1 / 7;
-      position: relative;
-      aspect-ratio: 4 / 3;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      background: var(--color-secondary);
-      box-shadow: var(--shadow-md);
-    }
     .close__inner { grid-column: 8 / -1; align-self: center; }
     .close__text {
       font-size: clamp(1.75rem, 3.6vw, 2.75rem);
@@ -273,7 +255,6 @@
     @media (max-width: 1023px) {
       .manifest__intro { grid-column: 1 / -1; position: static; margin-bottom: 28px; }
       .manifest__list { grid-column: 1 / -1; }
-      .close__media { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
       .close__inner { grid-column: 1 / -1; margin-top: 28px; }
     }
     @media (max-width: 767px) {
@@ -352,6 +333,34 @@
       .band__grid { gap: 10px; }
       .band__cap { font-size: 0.625rem; letter-spacing: 0.02em; margin-top: 8px; }
     }
+
+    /* --- Illustration tucked under the manifest intro --- */
+    .manifest__media {
+      position: relative;
+      margin-top: 28px;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-secondary);
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .manifest__media svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .manifest__media img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow), opacity var(--transition-slow);
+    }
+    .manifest__media img.is-missing { opacity: 0; pointer-events: none; }
+    .manifest__media:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .manifest__media:hover img:not(.is-missing) { transform: scale(1.03); }
+
+    /* closing block is now text only, so centre it */
+    .close__inner { grid-column: 1 / -1 !important; text-align: center; }
+    .close__text { margin-left: auto; margin-right: auto; max-width: 760px; }
   </style>
 </head>
 <body class="page-inner">
@@ -467,6 +476,25 @@
         <div class="manifest__intro">
           <h2 class="manifest__title" id="why-heading">Every relocation is different. The standard isn't.</h2>
           <p class="manifest__desc">We tailor each move to what's being shipped and where it's going. Every move combines export-grade packing materials, coordinated routing and a named contact who stays with the consignment from survey to delivery.</p>
+          <div class="manifest__media">
+          <svg viewBox="0 0 400 500" role="img" aria-label="Line drawing of a braced timber export crate with handling marks" preserveAspectRatio="xMidYMid slice" style="--len:1400">
+            <g stroke="var(--ink)" fill="none" stroke-width="2">
+              <rect data-draw x="46" y="84" width="308" height="332" fill="var(--object)"/>
+              <path data-draw d="M46 118H354M46 382H354"/>
+              <path data-draw d="M46 118L354 382M354 118L46 382" stroke="var(--rule)" stroke-width="1.5"/>
+              <path data-draw d="M80 84V416M320 84V416"/>
+              <rect x="150" y="150" width="100" height="10" fill="var(--signal)" stroke="var(--ink)" stroke-width="1.5"/>
+              <g stroke-width="1.5">
+                <path data-draw d="M118 210L134 186L150 210M134 186V246"/>
+                <path data-draw d="M162 210L178 186L194 210M178 186V246"/>
+                <path data-draw d="M232 194h44v40a22 22 0 0 1-44 0z M242 246h24"/>
+                <path data-draw d="M254 234V266"/>
+              </g>
+              <path d="M46 416L20 452M354 416L380 452M20 452H380" stroke="var(--rule)"/>
+            </g>
+          </svg>
+          <img src="images/loading-truck.jpg" alt="Wrapped consignment being loaded into a covered truck" onerror="this.classList.add('is-missing')" decoding="async">
+          </div>
         </div>
         <ul class="manifest__list">
         <li class="row" tabindex="0">
@@ -511,25 +539,6 @@
 
     <section class="close">
       <div class="container grid12">
-        <div class="close__media">
-          <svg viewBox="0 0 400 500" role="img" aria-label="Line drawing of a braced timber export crate with handling marks" preserveAspectRatio="xMidYMid slice" style="--len:1400">
-            <g stroke="var(--ink)" fill="none" stroke-width="2">
-              <rect data-draw x="46" y="84" width="308" height="332" fill="var(--object)"/>
-              <path data-draw d="M46 118H354M46 382H354"/>
-              <path data-draw d="M46 118L354 382M354 118L46 382" stroke="var(--rule)" stroke-width="1.5"/>
-              <path data-draw d="M80 84V416M320 84V416"/>
-              <rect x="150" y="150" width="100" height="10" fill="var(--signal)" stroke="var(--ink)" stroke-width="1.5"/>
-              <g stroke-width="1.5">
-                <path data-draw d="M118 210L134 186L150 210M134 186V246"/>
-                <path data-draw d="M162 210L178 186L194 210M178 186V246"/>
-                <path data-draw d="M232 194h44v40a22 22 0 0 1-44 0z M242 246h24"/>
-                <path data-draw d="M254 234V266"/>
-              </g>
-              <path d="M46 416L20 452M354 416L380 452M20 452H380" stroke="var(--rule)"/>
-            </g>
-          </svg>
-          <img src="images/loading-truck.jpg" alt="Wrapped consignment being loaded into a covered truck" onerror="this.classList.add('is-missing')" decoding="async">
-        </div>
         <div class="close__inner">
           <p class="close__text">Tell us what you're moving.</p>
           <a href="contact.html" class="btn btn--primary">Request a quote</a>
@@ -650,7 +659,7 @@
         });
       });
 
-      [].slice.call(document.querySelectorAll('.band__frame img, .close__media img'))
+      [].slice.call(document.querySelectorAll('.band__frame img, .manifest__media img'))
         .forEach(function (img) {
           if (img.complete && img.naturalWidth === 0) img.classList.add('is-missing');
           img.addEventListener('error', function () { img.classList.add('is-missing'); });

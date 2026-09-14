@@ -19,6 +19,141 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* ============================================
+       Gallery — polish, motion, interaction
+       built on the tokens in css/style.css
+       ============================================ */
+
+    /* --- Filters --- */
+    .projects__filter {
+      position: relative;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .projects__filter:hover:not(.active) {
+      transform: translateY(-2px);
+      border-color: var(--color-accent);
+      color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .projects__filter.active {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+      border-color: var(--color-primary);
+      color: var(--color-white);
+      box-shadow: 0 4px 15px rgba(11, 31, 58, 0.28);
+    }
+    .projects__filter::after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 6px;
+      height: 2px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transition: transform var(--transition);
+    }
+    .projects__filter.active::after { transform: scaleX(1); }
+    .projects__filter:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+    .projects__count {
+      text-align: center;
+      font-size: 0.8125rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-grey);
+      margin: -24px 0 28px;
+    }
+
+    /* --- Cards --- */
+    .project-card { position: relative; }
+    .project-card__image { box-shadow: var(--shadow-sm); transition: box-shadow var(--transition), transform var(--transition); }
+    .project-card:hover .project-card__image { box-shadow: var(--shadow-lg); transform: translateY(-6px); }
+    .project-card__image img { transform-origin: center; }
+    .project-card:hover .project-card__image img { transform: scale(1.07); }
+
+    /* the caption is always legible, the detail arrives on hover */
+    .project-card__overlay {
+      opacity: 1;
+      background: linear-gradient(to top, rgba(11, 31, 58, 0.92) 0%, rgba(11, 31, 58, 0.45) 42%, rgba(11, 31, 58, 0.05) 78%);
+      transition: background var(--transition);
+    }
+    .project-card:hover .project-card__overlay {
+      background: linear-gradient(to top, rgba(11, 31, 58, 0.96) 0%, rgba(11, 31, 58, 0.82) 55%, rgba(11, 31, 58, 0.5) 100%);
+    }
+    .project-card__title { position: relative; padding-bottom: 8px; transition: transform var(--transition); }
+    .project-card__title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 34px;
+      height: 2px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .project-card:hover .project-card__title::after { transform: scaleX(1); }
+
+    .project-card__meta,
+    .project-card__desc,
+    .project-card__btn {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .project-card:hover .project-card__meta,
+    .project-card:focus-within .project-card__meta { opacity: 1; transform: none; transition-delay: 0.04s; }
+    .project-card:hover .project-card__desc,
+    .project-card:focus-within .project-card__desc { opacity: 1; transform: none; transition-delay: 0.10s; }
+    .project-card:hover .project-card__btn,
+    .project-card:focus-within .project-card__btn { opacity: 1; transform: none; transition-delay: 0.16s; }
+
+    /* category chip, always visible */
+    .project-card__chip {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 2;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--color-accent);
+      color: var(--color-primary);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transform: translateY(-6px);
+      opacity: 0;
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .project-card.visible .project-card__chip { opacity: 1; transform: none; transition-delay: 0.35s; }
+
+    /* --- Staggered arrival --- */
+    .project-card.visible:nth-child(1) { animation-delay: 0.05s; }
+    .project-card.visible:nth-child(2) { animation-delay: 0.14s; }
+    .project-card.visible:nth-child(3) { animation-delay: 0.23s; }
+    .project-card.visible:nth-child(4) { animation-delay: 0.32s; }
+    .project-card.visible:nth-child(5) { animation-delay: 0.41s; }
+    .project-card.visible:nth-child(6) { animation-delay: 0.50s; }
+
+    /* photos fade up as they decode instead of snapping in */
+    .project-card__image img { opacity: 0; transition: opacity 0.5s ease, transform var(--transition-slow); }
+    .project-card__image img.is-loaded { opacity: 1; }
+
+    @media (max-width: 767px) {
+      .project-card__meta, .project-card__desc, .project-card__btn { opacity: 1; transform: none; }
+      .projects__count { margin-top: -12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .project-card:hover .project-card__image { transform: none; }
+      .project-card:hover .project-card__image img { transform: none; }
+      .project-card__image img { opacity: 1; }
+      .project-card__chip { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body class="page-inner">
 
@@ -83,10 +218,12 @@
           <button class="projects__filter" data-filter="warehousing" role="tab" aria-selected="false">Warehousing</button>
           <button class="projects__filter" data-filter="international" role="tab" aria-selected="false">International</button>
         </div>
+        <p class="projects__count" id="projectsCount" aria-live="polite"></p>
         <div class="projects__grid" id="projectsGrid">
           <article class="project-card reveal" data-category="residential">
             <div class="project-card__image">
-              <img src="images/relocation-packing-v2.jpg" alt="Household packing and relocation" loading="lazy">
+              <img src="images/household-move.jpg" alt="Wrapped and labelled household cartons loaded into a covered truck" loading="lazy">
+              <span class="project-card__chip">Residential</span>
               <div class="project-card__overlay">
                 <h3 class="project-card__title">Household Move</h3>
                 <p class="project-card__location">Kathmandu, Nepal</p>
@@ -101,7 +238,8 @@
           </article>
           <article class="project-card reveal" data-category="commercial">
             <div class="project-card__image">
-              <img src="images/freight-containers.jpg" alt="Corporate cargo logistics" loading="lazy">
+              <img src="images/corporate-cargo.jpg" alt="Two movers strapping a wrapped item during an office relocation" loading="lazy">
+              <span class="project-card__chip">Commercial</span>
               <div class="project-card__overlay">
                 <h3 class="project-card__title">Corporate Cargo</h3>
                 <p class="project-card__location">Lalitpur, Nepal</p>
@@ -116,7 +254,8 @@
           </article>
           <article class="project-card reveal" data-category="diplomatic">
             <div class="project-card__image">
-              <img src="images/relocation-packing-v2.jpg" alt="Diplomatic mission relocation packing" loading="lazy">
+              <img src="images/diplomatic-move.jpg" alt="Sealed consignment truck being secured before departure" loading="lazy">
+              <span class="project-card__chip">Diplomatic</span>
               <div class="project-card__overlay">
                 <h3 class="project-card__title">Diplomatic Move</h3>
                 <p class="project-card__location">Embassy District, Kathmandu</p>
@@ -131,7 +270,8 @@
           </article>
           <article class="project-card reveal" data-category="freight">
             <div class="project-card__image">
-              <img src="images/air-freight-v2.jpg" alt="Air freight transport" loading="lazy">
+              <img src="images/air-freight.jpg" alt="Aircraft wing above cloud on an international freight route" loading="lazy">
+              <span class="project-card__chip">Freight</span>
               <div class="project-card__overlay">
                 <h3 class="project-card__title">Air Freight Shipment</h3>
                 <p class="project-card__location">Tribhuvan International Airport</p>
@@ -146,7 +286,8 @@
           </article>
           <article class="project-card reveal" data-category="warehousing">
             <div class="project-card__image">
-              <img src="images/secure-warehouse.jpg" alt="Secure warehouse storage" loading="lazy">
+              <img src="images/secure-storage.jpg" alt="Numbered cartons stacked and sealed in storage" loading="lazy">
+              <span class="project-card__chip">Warehousing</span>
               <div class="project-card__overlay">
                 <h3 class="project-card__title">Secure Storage</h3>
                 <p class="project-card__location">Balkumari, Lalitpur</p>
@@ -161,7 +302,8 @@
           </article>
           <article class="project-card reveal" data-category="international freight">
             <div class="project-card__image">
-              <img src="images/freight-containers.jpg" alt="Ocean freight containers at port" loading="lazy">
+              <img src="images/ocean-freight.jpg" alt="Container ship loading at a deep-water port" loading="lazy">
+              <span class="project-card__chip">International</span>
               <div class="project-card__overlay">
                 <h3 class="project-card__title">Ocean Freight</h3>
                 <p class="project-card__location">Kolkata &amp; Haldia Ports</p>
@@ -177,11 +319,6 @@
         </div>
       </div>
     </section>
-
-
-  </main>
-
-
 
   </main>
 
@@ -255,5 +392,67 @@
   <script src="js/counter.js" defer></script>
   <script src="js/slider.js" defer></script>
   <script src="js/faq.js" defer></script>
+
+  <script>
+  (function () {
+    function init() {
+      var grid = document.getElementById('projectsGrid');
+      if (!grid) return;
+      var cards = [].slice.call(grid.querySelectorAll('.project-card'));
+      var filters = [].slice.call(document.querySelectorAll('.projects__filter'));
+      var count = document.getElementById('projectsCount');
+
+      // fade each photo in once it has actually decoded
+      [].slice.call(grid.querySelectorAll('img')).forEach(function (img) {
+        if (img.complete && img.naturalWidth) img.classList.add('is-loaded');
+        else img.addEventListener('load', function () { img.classList.add('is-loaded'); });
+        img.addEventListener('error', function () { img.classList.add('is-loaded'); });
+      });
+
+      function report() {
+        if (!count) return;
+        var shown = cards.filter(function (c) { return !c.classList.contains('hidden'); }).length;
+        count.textContent = shown === cards.length
+          ? 'Showing all ' + cards.length + ' projects'
+          : 'Showing ' + shown + ' of ' + cards.length + ' projects';
+      }
+      report();
+
+      // main.js owns the filtering; just re-report and re-stagger afterwards
+      filters.forEach(function (f, i) {
+        f.addEventListener('click', function () {
+          setTimeout(function () {
+            var shown = 0;
+            cards.forEach(function (c) {
+              if (c.classList.contains('hidden')) return;
+              c.style.animationDelay = (shown * 0.07) + 's';
+              shown++;
+            });
+            report();
+          }, 0);
+        });
+        // left and right arrows move between filter pills
+        f.addEventListener('keydown', function (e) {
+          var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+          if (!d) return;
+          e.preventDefault();
+          filters[(i + d + filters.length) % filters.length].focus();
+        });
+      });
+
+      // the whole card opens the details, not just the small button
+      cards.forEach(function (card) {
+        var btn = card.querySelector('.project-card__btn');
+        if (!btn) return;
+        card.addEventListener('click', function (e) {
+          if (e.target.closest('.project-card__btn')) return;
+          btn.click();
+        });
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
 </body>
 </html>

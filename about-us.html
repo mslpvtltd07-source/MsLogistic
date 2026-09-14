@@ -283,6 +283,41 @@
       .mission__icon svg *, .about__promise-icon svg * { animation: none !important; }
       .about__mission-item::after, .about__promise::after { display: none; }
     }
+
+    /* --- Page heading --- */
+    /* the tag is an eyebrow here, not a headline: no pill, no shadow, no pulse */
+    .about .section__tag,
+    .about .reveal.visible .section__tag {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: none;
+      padding: 0;
+      margin-bottom: 10px;
+      border-radius: 0;
+      box-shadow: none;
+      animation: none;
+      overflow: visible;
+      line-height: 1.4;
+    }
+    .about .section__tag::after { display: none; }
+
+    .about .section__title {
+      font-size: clamp(1.625rem, 3vw, 2.25rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--color-primary);
+      margin-bottom: 18px;
+    }
+    .about__text { font-size: 1.0625rem; line-height: 1.8; margin-bottom: 32px; }
+
+    /* eyebrow and intro centred */
+    .about .section__tag { text-align: center; margin-bottom: 14px; }
+    .about__text { text-align: center; max-width: 780px; margin-left: auto; margin-right: auto; }
   </style>
 </head>
 <body class="page-inner">
@@ -336,8 +371,7 @@
       <div class="container">
         <div class="about__grid">
           <div class="about__content reveal-right">
-            <span class="section__tag">About Us</span>
-            <!--<h2 class="section__title" id="about-heading">Nepal's Most Trusted Logistics Partner</h2>-->
+            <span class="section__tag" id="about-heading">About Us</span>
             <p class="about__text">MS Logistics Pvt. Ltd. is a Kathmandu-based household goods packing, transportation, and relocation company. We specialize in providing complete relocation solutions for Embassies, Diplomatic Missions, International Organizations, INGOs, corporate offices, and individual clients.</p>
             <div class="about__mission">
               <div class="about__mission-item" tabindex="0"><span class="mission__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="--len:150"><path data-draw d="M1.8 12S5.5 5.2 12 5.2 22.2 12 22.2 12 18.5 18.8 12 18.8 1.8 12 1.8 12z"/><circle data-draw cx="12" cy="12" r="3.1"/></svg></span><h3>Our Vision</h3>

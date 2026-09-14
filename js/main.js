@@ -37,7 +37,7 @@
   const SERVICES = [
     {
       title: 'Residential Relocation',
-      image: 'images/relocation-packing-v2.jpg',
+      image: 'images/residential-relocation.jpg',
       paragraphs: [
         'Moving to a new home should be an exciting experience, not a stressful one. At MS Logistics, we provide professional residential relocation services that ensure your household belongings are packed, transported, and delivered safely. From furniture and electronics to fragile items and personal possessions, every item is handled with care using high-quality packing materials and proven packing techniques.',
         'Our experienced team manages every stage of your move, including pre-move surveys, professional packing, transportation, inventory management, and final delivery. With careful planning, timely communication, and personalised support, we make every residential relocation smooth, secure, and hassle-free.'
@@ -45,7 +45,7 @@
     },
     {
       title: 'International Household Relocation',
-      image: 'images/freight-containers.jpg',
+      image: 'images/international-relocation.jpg',
       paragraphs: [
         'Relocating overseas requires careful planning and expert coordination. MS Logistics provides complete international household relocation services, managing everything from export-quality packing and freight arrangements to customs documentation support and door-to-door delivery. Every relocation is customised according to your destination, shipment size, and specific requirements.',
         'Whether your belongings are travelling by air or sea, our experienced logistics team ensures they are protected throughout the journey and comply with international shipping standards. With reliable coordination, shipment tracking, and dedicated customer support, we make your international move efficient, secure, and worry-free.'
@@ -53,7 +53,7 @@
     },
     {
       title: 'Embassy & Diplomatic Relocation',
-      image: 'images/relocation-packing-v2.jpg',
+      image: 'images/diplomatic-relocation.jpg',
       paragraphs: [
         'MS Logistics specialises in relocation services for embassies, diplomatic missions, international organisations, and expatriate professionals. We understand the importance of confidentiality, precision, and timely execution, ensuring every relocation is handled with the highest level of professionalism and care.',
         'Our services include professional packing, freight coordination, customs documentation support, secure warehousing, and complete door-to-door delivery. A dedicated project coordinator oversees every stage of the relocation, providing regular updates and ensuring a seamless moving experience that meets diplomatic standards.'
@@ -61,7 +61,7 @@
     },
     {
       title: 'Corporate & Office Relocation',
-      image: 'images/relocation-packing-v2.jpg',
+      image: 'images/corporate-relocation.jpg',
       paragraphs: [
         'We help businesses relocate efficiently with minimal disruption to daily operations. From offices and corporate headquarters to institutional facilities, our team carefully plans and manages every aspect of the move, ensuring office furniture, equipment, documents, and technology are transported safely and systematically.',
         'Our end-to-end relocation solutions include packing, transportation, inventory management, storage, and final setup coordination. With experienced professionals and a structured approach, MS Logistics delivers reliable corporate relocation services that allow your business to resume operations quickly and efficiently.'
@@ -77,7 +77,7 @@
     },
     {
       title: 'Sea Freight Services',
-      image: 'images/freight-containers.jpg',
+      image: 'images/sea-freight.jpg',
       paragraphs: [
         'Sea freight is a cost-effective solution for medium and large international household shipments. We provide complete sea freight management, including export packing, container booking, documentation support, customs coordination, and final delivery to destinations worldwide.',
         'Using moisture-resistant packing materials, customised wooden crating, and secure container loading techniques, we protect your belongings throughout long-distance ocean transportation. Every shipment is handled according to international shipping standards for maximum safety and reliability.'
@@ -85,7 +85,7 @@
     },
     {
       title: 'Customs Documentation & Clearance Support',
-      image: 'images/relocation-packing.jpg',
+      image: 'images/customs-clearance.jpg',
       paragraphs: [
         'International relocations involve complex documentation and customs procedures. Our experienced team assists with preparing the required paperwork, coordinating export formalities, and supporting customs clearance to help minimise delays and ensure smooth shipment processing.',
         'We work closely with clients and relevant authorities to manage documentation, packing list verification, and customs coordination. By handling these important procedures professionally, we make international moving simpler and more efficient.'
@@ -93,7 +93,7 @@
     },
     {
       title: 'Secure Warehousing & Storage',
-      image: 'images/secure-warehouse.jpg',
+      image: 'images/warehousing.jpg',
       paragraphs: [
         'MS Logistics offers secure short-term and long-term warehousing solutions for household goods, office equipment, and export shipments. Our warehouse is designed to keep your belongings safe, organised, and protected until they are ready for transportation or delivery.',
         'Every shipment is systematically inventoried and stored using professional handling practices to ensure easy retrieval and maximum protection. Whether you require temporary storage during relocation or long-term warehousing, we provide a safe and reliable storage solution.'
@@ -101,7 +101,7 @@
     },
     {
       title: 'Professional Export Packing',
-      image: 'images/relocation-packing.jpg',
+      image: 'images/export-packing.jpg',
       paragraphs: [
         'Proper packing is the foundation of every successful relocation. Our trained packing specialists use premium export-quality materials such as 7-Ply & 9-Ply export cartons, corrugated sheets & kraft paper, bubble wrap, foam & thermocol, moisture protection (plastic sheeting, silica gel), labeling, sealing & inventory numbering and customised wooden crates to protect your belongings throughout transportation.',
         'Every item is packed according to its size, weight, and fragility, while each carton is clearly labelled and inventoried for efficient handling, customs inspection, and delivery. Our professional packing standards ensure your belongings remain secure from origin to destination.'
@@ -109,7 +109,7 @@
     },
     {
       title: 'Door-to-Door Relocation Management',
-      image: 'images/relocation-packing-v2.jpg',
+      image: 'images/door-to-door.jpg',
       paragraphs: [
         'Our door-to-door relocation service provides complete management of your move from the initial survey to final delivery. We coordinate packing, transportation, freight, customs support, warehousing, and delivery, ensuring every stage is handled by experienced professionals.',
         'With a single point of coordination and regular shipment updates, you can enjoy a seamless relocation experience without the stress of managing multiple service providers. MS Logistics delivers a comprehensive solution designed for convenience, reliability, and complete peace of mind.'

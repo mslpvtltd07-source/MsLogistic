@@ -529,6 +529,12 @@
     }
 
     /* --- Hero: stop the typed line from reflowing the page --- */
+    .hero__typing,
+    .hero__typing.typing-active {
+      border-right: 0;
+      padding-right: 0;
+      animation: none;
+    }
     .hero__typing {
       display: block;
       white-space: nowrap;
@@ -1107,7 +1113,7 @@
       var prev = document.getElementById('stepPrev');
       var next = document.getElementById('stepNext');
       var pips = document.getElementById('stepPips');
-      var total = nodes.length, current = 0, timer = null, stopped = false;
+      var total = nodes.length, current = 0, timer = null;
 
       for (var i = 0; i < total; i++) pips.appendChild(document.createElement('i'));
 
@@ -1123,28 +1129,22 @@
         prev.disabled = current === 0;
         next.textContent = current === total - 1 ? 'Start over \u21BA' : 'Next step \u2192';
       }
-      function stop() {
-        stopped = true;
-        if (timer) { clearInterval(timer); timer = null; }
-      }
       function start() {
-        if (stopped || timer) return;
-        timer = setInterval(function () { go(current + 1); }, 5200);
+        if (timer) return;
+        timer = setInterval(function () { go(current + 1); }, 5000);
+      }
+      function restart() {            // a manual move resets the 5s window, it does not end it
+        if (timer) { clearInterval(timer); timer = null; }
+        start();
       }
 
-      nodes.forEach(function (nd, i) { nd.addEventListener('click', function () { stop(); go(i, true); }); });
-      prev.addEventListener('click', function () { stop(); go(current - 1, true); });
-      next.addEventListener('click', function () { stop(); go(current + 1, true); });
+      nodes.forEach(function (nd, i) { nd.addEventListener('click', function () { go(i, true); restart(); }); });
+      prev.addEventListener('click', function () { go(current - 1, true); restart(); });
+      next.addEventListener('click', function () { go(current + 1, true); restart(); });
       root.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { stop(); go(current + 1, true); }
-        else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { stop(); go(current - 1, true); }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { go(current + 1, true); restart(); }
+        else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { go(current - 1, true); restart(); }
       });
-      root.addEventListener('mouseenter', function () {
-        if (timer) { clearInterval(timer); timer = null; }
-      });
-      root.addEventListener('mouseleave', start);
-      root.addEventListener('focusin', stop);
-
       go(0, true);
 
       if ('IntersectionObserver' in window) {
@@ -1152,7 +1152,7 @@
           entries.forEach(function (e) { if (e.isIntersecting) { start(); io.unobserve(e.target); } });
         }, { threshold: 0.3 });
         io.observe(root);
-      }
+      } else start();
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();

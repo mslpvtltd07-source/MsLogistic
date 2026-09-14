@@ -55,7 +55,6 @@ for Embassies, Diplomatic Missions, Organizations and Individuals  --- */
     let isDeleting = false;
     let typingSpeed = 100;
 
-    heroTyping.classList.add('typing-active');
 
     function type() {
       const currentPhrase = TYPING_PHRASES[phraseIndex];

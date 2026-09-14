@@ -19,6 +19,271 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* ============================================
+       About Us — vision, mission and promise
+       built on the tokens in css/style.css
+       ============================================ */
+
+    /* the visual column is gone, so the text runs full width */
+    .about__grid { grid-template-columns: 1fr; }
+    .about__content { max-width: 900px; margin: 0 auto; }
+
+    /* --- Vision and Mission cards --- */
+    .about__mission-item {
+      position: relative;
+      padding: 22px 22px 22px 24px;
+      background: var(--color-white);
+      border: 1px solid var(--color-grey-light);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition),
+                  border-color var(--transition), background var(--transition);
+    }
+    .about__mission-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 3px;
+      background: var(--color-accent);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform var(--transition);
+    }
+    .about__mission-item:hover,
+    .about__mission-item:focus-visible,
+    .about__mission-item.is-open {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent);
+      outline: none;
+    }
+    .about__mission-item:hover::before,
+    .about__mission-item:focus-visible::before,
+    .about__mission-item.is-open::before { transform: scaleY(1); }
+    .about__mission-item.is-open { background: rgba(216, 169, 94, 0.1); }
+
+    .mission__icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 14px;
+      border-radius: var(--radius-sm);
+      color: var(--color-primary);
+      background: rgba(216, 169, 94, 0.18);
+      box-shadow: 0 0 0 1px rgba(216, 169, 94, 0.35) inset;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .mission__icon svg { width: 23px; height: 23px; display: block; }
+    .about__mission-item:hover .mission__icon,
+    .about__mission-item:focus-visible .mission__icon,
+    .about__mission-item.is-open .mission__icon {
+      background: var(--color-accent);
+      transform: translateY(-2px) scale(1.06);
+    }
+
+    /* --- Promise --- */
+    .about__promise { display: flex; align-items: flex-start; gap: 14px; }
+    .about__promise-icon {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      color: var(--color-primary);
+      background: rgba(216, 169, 94, 0.22);
+    }
+    .about__promise-icon svg { width: 20px; height: 20px; display: block; }
+
+    /* --- Entrance --- */
+    .about__mission-item, .about__promise { opacity: 0; }
+    .about.is-in .about__mission-item:nth-child(1) { animation: aboutRise 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) 0.10s both; }
+    .about.is-in .about__mission-item:nth-child(2) { animation: aboutRise 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) 0.22s both; }
+    .about.is-in .about__promise { animation: aboutRise 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) 0.34s both; }
+    @keyframes aboutRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+    [data-draw] { stroke-dasharray: var(--len, 150); stroke-dashoffset: var(--len, 150); }
+    .about.is-in [data-draw] { animation: aboutDraw 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+    .about__mission-item:hover [data-draw],
+    .about__mission-item:focus-visible [data-draw],
+    .about__mission-item.is-open [data-draw],
+    .about__promise:hover [data-draw],
+    .about__promise:focus-visible [data-draw],
+    .about__promise.is-open [data-draw] { stroke-dashoffset: 0; }
+    .about.is-in .about__mission-item:nth-child(1) [data-draw] { animation-delay: 0.26s; }
+    .about.is-in .about__mission-item:nth-child(2) [data-draw] { animation-delay: 0.38s; }
+    .about.is-in .about__promise [data-draw] { animation-delay: 0.50s; }
+    @keyframes aboutDraw { to { stroke-dashoffset: 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .about__mission-item, .about__promise { opacity: 1; }
+      [data-draw] { stroke-dashoffset: 0; }
+      .about.is-in .about__mission-item:nth-child(1),
+      .about.is-in .about__mission-item:nth-child(2),
+      .about.is-in .about__promise,
+      .about.is-in [data-draw] { animation: none; }
+    }
+
+    /* --- Promise sits alongside vision and mission --- */
+    .about__mission { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+    .about__promise {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      margin: 0;
+      padding: 22px 22px 22px 24px;
+      background: var(--color-white);
+      border: 1px solid var(--color-grey-light);
+      border-left: 1px solid var(--color-grey-light);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      font-size: 0.875rem;
+      color: var(--color-grey);
+      position: relative;
+      overflow: hidden;
+    }
+    .about__promise::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 16px;
+      bottom: 16px;
+      width: 3px;
+      background: var(--color-accent);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform var(--transition);
+      z-index: 1;
+    }
+    .about__promise:hover::before,
+    .about__promise:focus-visible::before,
+    .about__promise.is-open::before { transform: scaleY(1); }
+    .about__promise strong { color: var(--color-primary); font-weight: 600; }
+    .about__promise-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: 14px;
+      background: rgba(216, 169, 94, 0.18);
+      box-shadow: 0 0 0 1px rgba(216, 169, 94, 0.35) inset;
+    }
+    .about__promise-icon svg { width: 23px; height: 23px; }
+    .about__promise-icon {
+      transition: background var(--transition), transform var(--transition);
+    }
+    .about__promise:hover .about__promise-icon,
+    .about__promise:focus-visible .about__promise-icon,
+    .about__promise.is-open .about__promise-icon {
+      background: var(--color-accent);
+      transform: translateY(-2px) scale(1.06);
+    }
+    @media (max-width: 1023px) {
+      .about__mission { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .about__promise { grid-column: 1 / -1; }
+    }
+    @media (max-width: 767px) {
+      .about__mission { grid-template-columns: 1fr; }
+      .about__promise { grid-column: auto; }
+    }
+
+    /* --- Icon motion --- */
+    .mission__icon svg *, .about__promise-icon svg * {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    /* gentle idle float, offset per card so they never move in lockstep */
+    .mission__icon, .about__promise-icon { animation: iconFloat 4.5s ease-in-out infinite; }
+    .about__mission-item:nth-child(2) .mission__icon { animation-delay: 1.5s; }
+    .about__promise .about__promise-icon { animation-delay: 3s; }
+    @keyframes iconFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -3px; } }
+
+    /* eye: the pupil tracks side to side, then the eye blinks */
+    .about__mission-item:nth-child(1):hover .mission__icon svg circle,
+    .about__mission-item:nth-child(1):focus-visible .mission__icon svg circle,
+    .about__mission-item:nth-child(1).is-open .mission__icon svg circle {
+      animation: eyeScan 2.4s ease-in-out infinite;
+    }
+    .about__mission-item:nth-child(1):hover .mission__icon svg path,
+    .about__mission-item:nth-child(1):focus-visible .mission__icon svg path,
+    .about__mission-item:nth-child(1).is-open .mission__icon svg path {
+      animation: eyeBlink 2.4s ease-in-out infinite;
+    }
+    @keyframes eyeScan {
+      0%, 100% { translate: -2.2px 0; stroke-dashoffset: 0; }
+      50% { translate: 2.2px 0; stroke-dashoffset: 0; }
+    }
+    @keyframes eyeBlink {
+      0%, 44%, 56%, 100% { scale: 1 1; stroke-dashoffset: 0; }
+      50% { scale: 1 0.12; stroke-dashoffset: 0; }
+    }
+
+    /* target: rings pulse outward from the centre */
+    .about__mission-item:nth-child(2):hover .mission__icon svg circle,
+    .about__mission-item:nth-child(2):focus-visible .mission__icon svg circle,
+    .about__mission-item:nth-child(2).is-open .mission__icon svg circle {
+      animation: ringPulse 1.8s ease-out infinite;
+    }
+    .about__mission-item:nth-child(2) .mission__icon svg circle:nth-child(2) { animation-delay: 0.18s; }
+    .about__mission-item:nth-child(2) .mission__icon svg circle:nth-child(3) { animation-delay: 0.36s; }
+    @keyframes ringPulse {
+      0% { scale: 1; opacity: 1; stroke-dashoffset: 0; }
+      60% { scale: 1.22; opacity: 0.35; stroke-dashoffset: 0; }
+      100% { scale: 1; opacity: 1; stroke-dashoffset: 0; }
+    }
+
+    /* shield: the tick redraws itself */
+    .about__promise:hover .about__promise-icon svg polyline,
+    .about__promise:focus-visible .about__promise-icon svg polyline,
+    .about__promise.is-open .about__promise-icon svg polyline {
+      animation: tickDraw 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @keyframes tickDraw {
+      0% { stroke-dashoffset: 150; }
+      45%, 100% { stroke-dashoffset: 0; }
+    }
+
+    /* --- Card interaction --- */
+    .about__mission-item, .about__promise {
+      --mx: 50%;
+      --my: 50%;
+      cursor: pointer;
+    }
+    .about__mission-item::after, .about__promise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(220px circle at var(--mx) var(--my), rgba(216, 169, 94, 0.16), transparent 65%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+    }
+    .about__mission-item:hover::after, .about__promise:hover::after { opacity: 1; }
+    .about__promise:hover, .about__promise:focus-visible, .about__promise.is-open {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent);
+      outline: none;
+    }
+    .about__promise {
+      transition: transform var(--transition), box-shadow var(--transition),
+                  border-color var(--transition), background var(--transition);
+    }
+    .about__promise.is-open { background: rgba(216, 169, 94, 0.1); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mission__icon, .about__promise-icon,
+      .mission__icon svg *, .about__promise-icon svg * { animation: none !important; }
+      .about__mission-item::after, .about__promise::after { display: none; }
+    }
+  </style>
 </head>
 <body class="page-inner">
 
@@ -70,31 +335,19 @@
     <section class="about section" id="about" aria-labelledby="about-heading">
       <div class="container">
         <div class="about__grid">
-          <div class="about__visual reveal-left">
-            <div class="about__collage">
-              <img src="images/secure-warehouse.jpg" alt="Secure warehouse logistics operations" class="about__img about__img--main" loading="lazy">
-              <img src="images/relocation-packing-v2.jpg" alt="Professional household relocation packing" class="about__img about__img--secondary" loading="lazy">
-              <!-- <div class="about__badge">
-                <span class="about__badge-number">10+</span>
-                <span class="about__badge-text">Years of Operations</span>
-              </div> -->
-            </div>
-          </div>
           <div class="about__content reveal-right">
             <span class="section__tag">About Us</span>
             <!--<h2 class="section__title" id="about-heading">Nepal's Most Trusted Logistics Partner</h2>-->
             <p class="about__text">MS Logistics Pvt. Ltd. is a Kathmandu-based household goods packing, transportation, and relocation company. We specialize in providing complete relocation solutions for Embassies, Diplomatic Missions, International Organizations, INGOs, corporate offices, and individual clients.</p>
             <div class="about__mission">
-              <div class="about__mission-item">
-                <h3>Our Vision</h3>
+              <div class="about__mission-item" tabindex="0"><span class="mission__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="--len:150"><path data-draw d="M1.8 12S5.5 5.2 12 5.2 22.2 12 22.2 12 18.5 18.8 12 18.8 1.8 12 1.8 12z"/><circle data-draw cx="12" cy="12" r="3.1"/></svg></span><h3>Our Vision</h3>
                 <p>To become one of the most trusted and respected logistics and international relocation service providers in Nepal by delivering professional, reliable and customer-focused solution for diplomatic missions, international organizations, corporate clients and individuals.</p>
-              </div>
-              <div class="about__mission-item">
-                <h3>Our Mission</h3>
+            </div>
+              <div class="about__mission-item" tabindex="0"><span class="mission__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="--len:150"><circle data-draw cx="12" cy="12" r="8.6"/><circle data-draw cx="12" cy="12" r="4.6"/><circle data-draw cx="12" cy="12" r="1.2"/></svg></span><h3>Our Mission</h3>
                 <p>To provide complete household goods packing, transportation and international relocation services through professional planning, high-quality packing standards and efficient logistics coordination.</p>
               </div>
+              <p class="about__promise" tabindex="0"><span class="about__promise-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="--len:150"><path data-draw d="M12 21.6s7.2-3.6 7.2-9V4.9L12 2.2 4.8 4.9v7.7c0 5.4 7.2 9 7.2 9z"/><polyline data-draw points="9 11.9 11.1 14 15 10"/></svg></span><strong>Our Promise:</strong> Absolute accountability, single-point responsibility, and a zero-damage standard on every shipment — from a single household move to institutional cargo.</p>
             </div>
-            <p class="about__promise"><strong>Our Promise:</strong> Absolute accountability, single-point responsibility, and a zero-damage standard on every shipment — from a single household move to institutional cargo.</p>
            <!-- <div class="about__features">
              <div class="about__feature-card">
                 <div class="about__feature-icon">&#128230;</div>
@@ -121,11 +374,6 @@
         </div>
       </div>
     </section>
-
-
-  </main>
-
-
 
   </main>
 
@@ -199,5 +447,69 @@
   <script src="js/counter.js" defer></script>
   <script src="js/slider.js" defer></script>
   <script src="js/faq.js" defer></script>
+
+  <script>
+  (function () {
+    function init() {
+      var section = document.querySelector('.about');
+      if (!section) return;
+
+      function watch() {
+        if (!('IntersectionObserver' in window)) { section.classList.add('is-in'); return; }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('is-in');
+            io.unobserve(e.target);
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+        io.observe(section);
+      }
+
+      // wait for the loading screen before playing the entrance
+      if (document.body.classList.contains('loaded')) {
+        watch();
+      } else {
+        var started = false;
+        function go() { if (!started) { started = true; watch(); } }
+        if (window.MutationObserver) {
+          var mo = new MutationObserver(function () {
+            if (document.body.classList.contains('loaded')) { mo.disconnect(); setTimeout(go, 120); }
+          });
+          mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        }
+        window.addEventListener('load', function () { setTimeout(go, 900); });
+        setTimeout(go, 3000);
+      }
+
+      var cards = [].slice.call(document.querySelectorAll('.about__mission-item, .about__promise'));
+
+      cards.forEach(function (card) {
+        card.addEventListener('pointermove', function (e) {
+          var r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+        card.addEventListener('pointerleave', function () {
+          card.style.removeProperty('--mx');
+          card.style.removeProperty('--my');
+        });
+      });
+      cards.forEach(function (card) {
+        function toggle() {
+          var open = card.classList.contains('is-open');
+          cards.forEach(function (c) { c.classList.remove('is-open'); });
+          if (!open) card.classList.add('is-open');
+        }
+        card.addEventListener('click', toggle);
+        card.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        });
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
 </body>
 </html>

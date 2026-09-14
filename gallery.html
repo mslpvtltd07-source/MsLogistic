@@ -153,6 +153,21 @@
       .project-card__image img { opacity: 1; }
       .project-card__chip { opacity: 1; transform: none; }
     }
+
+    /* --- Page headline, matching About Us --- */
+    .projects .section__title {
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--color-primary);
+      max-width: 1000px;
+      margin: 56px auto 20px;
+    }
+    .projects .section__desc { font-size: 1.0625rem; line-height: 1.8; max-width: 720px; }
+    @media (max-width: 767px) {
+      .projects .section__title { margin-top: 28px; }
+    }
   </style>
 </head>
 <body class="page-inner">
@@ -184,12 +199,10 @@
           <li><a href="about-us.html" class="header__link">About Us</a></li>
           <li><a href="services.html" class="header__link">Services</a></li>
           <li><a href="why-choose-us.html" class="header__link">Why Choose Us</a></li>
-          <li><a href="clients.html" class="header__link">Clients</a></li>
           <li><a href="gallery.html" class="header__link active">Gallery</a></li>
           <li><a href="contact.html" class="header__link">Contact</a></li>
         </ul>
       </nav>
-      <a href="contact.html" class="btn btn--primary header__cta">Work With Us</a>
       <button class="header__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
         <span></span>
         <span></span>
@@ -205,7 +218,6 @@
     <section class="projects section section--grey" id="projects" aria-labelledby="projects-heading">
       <div class="container">
         <div class="section__header reveal">
-          <span class="section__tag">Our Gallery</span>
           <h2 class="section__title" id="projects-heading">Logistics Operations in Action</h2>
           <p class="section__desc">Explore our gallery of logistics operations — from household relocation to global freight and warehousing.</p>
         </div>

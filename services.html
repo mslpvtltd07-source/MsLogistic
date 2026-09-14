@@ -19,6 +19,161 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* ============================================
+       Services — stack polish, motion, interaction
+       built on the tokens in css/style.css
+       NOTE: services-animation.js writes transform, opacity, z-index and
+       visibility onto .stack-card every frame, so nothing here touches
+       those four properties on the card itself. Children only.
+       ============================================ */
+
+    .services__stack { position: relative; }
+
+    /* --- Progress rail --- */
+    /* lives inside the sticky stage, so it is pinned to the card that is showing */
+    .services__rail {
+      position: absolute;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      pointer-events: auto;
+    }
+    .services__rail-dot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: none;
+      border: 0;
+      padding: 3px 0;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--color-grey);
+    }
+    .services__rail-dot i {
+      display: block;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background: rgba(11, 31, 58, 0.22);
+      transition: width var(--transition), background var(--transition);
+    }
+    .services__rail-dot span {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      transform: translateX(6px);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .services__rail-dot:hover i { width: 32px; background: var(--color-accent); }
+    .services__rail-dot:hover span { opacity: 0.8; transform: none; }
+    .services__rail-dot:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+    .services__rail-dot.is-on i { width: 40px; background: var(--color-accent); }
+    .services__rail-dot.is-on span { opacity: 1; transform: none; color: var(--color-primary); }
+
+    /* --- Card imagery --- */
+    .stack-card__image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, rgba(11, 31, 58, 0.25) 0%, rgba(11, 31, 58, 0) 55%);
+      pointer-events: none;
+    }
+    .stack-card.is-active .stack-card__image img {
+      animation: kenBurns 9s ease-out forwards;
+    }
+    @keyframes kenBurns {
+      from { transform: scale(1.01); }
+      to { transform: scale(1.09); }
+    }
+
+    /* --- Card interior arrives in sequence --- */
+    .stack-card.is-active .stack-card__number { animation: svcRise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) 0.05s both; }
+    .stack-card.is-active .stack-card__title  { animation: svcRise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) 0.13s both; }
+    .stack-card.is-active .stack-card__desc   { animation: svcRise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) 0.21s both; }
+    .stack-card.is-active .stack-card__tags   { animation: svcRise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) 0.29s both; }
+    .stack-card.is-active .stack-card__link   { animation: svcRise 0.55s cubic-bezier(0.22, 0.8, 0.3, 1) 0.37s both; }
+    @keyframes svcRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+    /* the big number gets a hairline rule beside it */
+    .stack-card__number { position: relative; display: flex; align-items: center; gap: 14px; }
+    .stack-card__number::after {
+      content: '';
+      flex: 0 0 auto;
+      width: 56px;
+      height: 2px;
+      background: var(--color-accent);
+      opacity: 0.5;
+    }
+
+    /* --- Tags --- */
+    .stack-card__tags span {
+      transition: background var(--transition), color var(--transition), transform var(--transition);
+      cursor: default;
+    }
+    .stack-card__tags span:hover {
+      background: var(--color-accent);
+      color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    /* --- Read more --- */
+    .stack-card__link {
+      position: relative;
+      cursor: pointer;
+      font-family: inherit;
+      overflow: hidden;
+    }
+    .stack-card__link span { display: inline-block; transition: transform var(--transition); }
+    .stack-card__link:hover span { transform: translateX(5px); }
+    .stack-card__link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: var(--color-accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .stack-card__link:hover::after { transform: scaleX(1); }
+    .stack-card__link:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+    /* --- The incoming card reads as a deck, not a flat swap --- */
+    .stack-card.is-next { box-shadow: 0 -20px 60px rgba(11, 31, 58, 0.16); }
+    .stack-card.is-next .stack-card__content > * { opacity: 0.55; }
+
+    @media (max-width: 1023px) {
+      .services__rail { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .stack-card.is-active .stack-card__image img,
+      .stack-card.is-active .stack-card__number,
+      .stack-card.is-active .stack-card__title,
+      .stack-card.is-active .stack-card__desc,
+      .stack-card.is-active .stack-card__tags,
+      .stack-card.is-active .stack-card__link { animation: none; }
+    }
+
+    /* --- Stop the active card being clipped as it lifts --- */
+    /* services-animation.js sets stage height = card height inline, and the stage
+       clips overflow, so the 18px lift had nowhere to go. content-box makes that
+       inline height apply to the content area, and the padding gives it headroom. */
+    .services__stage {
+      box-sizing: content-box;
+      padding-top: 34px;
+      padding-bottom: 10px;
+      top: calc(var(--header-height) + 6px);
+    }
+  </style>
 </head>
 <body class="page-inner page-services">
 
@@ -76,10 +231,11 @@
         </div>
         <div class="services__stack" id="servicesGrid">
           <div class="services__stage">
+            <nav class="services__rail" id="servicesRail" aria-label="Jump to a service"></nav>
             <div class="services__cards">
               <article class="stack-card" data-index="0" role="group" aria-labelledby="service-title-0">
                 <div class="stack-card__image">
-                  <img src="images/relocation-packing-v2.jpg" alt="Residential household relocation packing" loading="lazy">
+                  <img src="images/residential-relocation.jpg" alt="Packed cartons stacked and ready in a home" loading="lazy">
                 </div>
                 <div class="stack-card__content">
                 <span class="stack-card__number">01</span>
@@ -95,7 +251,7 @@
 
             <article class="stack-card" data-index="1" role="group" aria-labelledby="service-title-1">
               <div class="stack-card__image">
-                <img src="images/freight-containers.jpg" alt="International household relocation and freight" loading="lazy">
+                <img src="images/international-relocation.jpg" alt="Shipping containers stacked in a yard beside a reach stacker" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">02</span>
@@ -111,7 +267,7 @@
 
             <article class="stack-card" data-index="2" role="group" aria-labelledby="service-title-2">
               <div class="stack-card__image">
-                <img src="images/relocation-packing-v2.jpg" alt="Embassy and diplomatic relocation packing" loading="lazy">
+                <img src="images/diplomatic-relocation.jpg" alt="Nepali and partner national flags flying outside a diplomatic mission" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">03</span>
@@ -127,7 +283,7 @@
 
             <article class="stack-card" data-index="3" role="group" aria-labelledby="service-title-3">
               <div class="stack-card__image">
-                <img src="images/relocation-packing-v2.jpg" alt="Corporate and office relocation services" loading="lazy">
+                <img src="images/corporate-relocation.jpg" alt="Packer wrapping and taping items during an office relocation" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">04</span>
@@ -159,7 +315,7 @@
 
             <article class="stack-card" data-index="5" role="group" aria-labelledby="service-title-5">
               <div class="stack-card__image">
-                <img src="images/freight-containers.jpg" alt="Sea freight container shipping services" loading="lazy">
+                <img src="images/sea-freight.jpg" alt="Stacked shipping containers beside quay cranes at a port terminal" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">06</span>
@@ -175,7 +331,7 @@
 
             <article class="stack-card" data-index="6" role="group" aria-labelledby="service-title-6">
               <div class="stack-card__image">
-                <img src="images/relocation-packing.jpg" alt="Customs documentation and clearance support" loading="lazy">
+                <img src="images/customs-clearance.jpg" alt="Shipping paperwork being signed on a clipboard at handover" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">07</span>
@@ -191,7 +347,7 @@
 
             <article class="stack-card" data-index="7" role="group" aria-labelledby="service-title-7">
               <div class="stack-card__image">
-                <img src="images/secure-warehouse.jpg" alt="Secure warehousing and storage" loading="lazy">
+                <img src="images/warehousing.jpg" alt="Palletised goods on racking inside a storage warehouse" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">08</span>
@@ -207,7 +363,7 @@
 
             <article class="stack-card" data-index="8" role="group" aria-labelledby="service-title-8">
               <div class="stack-card__image">
-                <img src="images/relocation-packing.jpg" alt="Professional export packing" loading="lazy">
+                <img src="images/export-packing.jpg" alt="Crew wrapping glassware and crockery for export packing" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">09</span>
@@ -223,7 +379,7 @@
 
             <article class="stack-card" data-index="9" role="group" aria-labelledby="service-title-9">
               <div class="stack-card__image">
-                <img src="images/relocation-packing-v2.jpg" alt="Door-to-door relocation management" loading="lazy">
+                <img src="images/door-to-door.jpg" alt="Consignment loaded and stacked inside a shipping container" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">10</span>
@@ -254,8 +410,6 @@
       <div class="modal__service" id="serviceModalBody"></div>
     </div>
   </div>
-
-  </main>
 
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
@@ -328,5 +482,59 @@
   <script src="js/counter.js" defer></script>
   <script src="js/slider.js" defer></script>
   <script src="js/faq.js" defer></script>
+
+  <script>
+  (function () {
+    function init() {
+      var stack = document.getElementById('servicesGrid');
+      var rail = document.getElementById('servicesRail');
+      if (!stack || !rail) return;
+      var cards = [].slice.call(stack.querySelectorAll('.stack-card'));
+      var track = stack.querySelector('.services__scroll-track');
+      if (!cards.length) return;
+
+      // build one marker per service
+      cards.forEach(function (card, i) {
+        var title = card.querySelector('.stack-card__title');
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'services__rail-dot';
+        b.innerHTML = '<span>' + (i + 1 < 10 ? '0' : '') + (i + 1) + '</span><i></i>';
+        b.setAttribute('aria-label', 'Go to ' + (title ? title.textContent : 'service ' + (i + 1)));
+        b.addEventListener('click', function () { jump(i); });
+        rail.appendChild(b);
+      });
+      var dots = [].slice.call(rail.children);
+
+      // mirrors the maths in services-animation.js so a click lands on that card
+      function jump(i) {
+        if (!track) return;
+        var trackTop = track.getBoundingClientRect().top + window.scrollY;
+        var anchor = window.innerHeight * 0.42;
+        // must match SCROLL_PER_CARD's tail in services-animation.js
+        var range = track.offsetHeight - window.innerHeight * 0.25 - 420;
+        if (range <= 0) return;
+        var progress = cards.length > 1 ? i / (cards.length - 1) : 0;
+        window.scrollTo({ top: Math.round(trackTop - anchor + progress * range), behavior: 'smooth' });
+      }
+
+      // follow whichever card the scroll animation has marked active
+      function sync() {
+        var active = cards.findIndex(function (c) { return c.classList.contains('is-active'); });
+        dots.forEach(function (d, i) { d.classList.toggle('is-on', i === active); });
+      }
+      sync();
+      if (window.MutationObserver) {
+        var mo = new MutationObserver(sync);
+        cards.forEach(function (c) { mo.observe(c, { attributes: true, attributeFilter: ['class'] }); });
+      } else {
+        window.addEventListener('scroll', sync, { passive: true });
+      }
+
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
 </body>
 </html>

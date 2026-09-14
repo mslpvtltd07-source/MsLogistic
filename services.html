@@ -173,6 +173,43 @@
       padding-bottom: 10px;
       top: calc(var(--header-height) + 6px);
     }
+
+    /* --- "Our Services" label: an eyebrow, not a headline --- */
+    /* style.css renders section__tag as a large navy pill with a shine sweep and
+       a pulsing shadow from animations.css. All of that is stripped back here. */
+    .services .section__tag,
+    .services .reveal.visible .section__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: none;
+      padding: 0;
+      margin-bottom: 12px;
+      border-radius: 0;
+      box-shadow: none;
+      animation: none;
+      overflow: visible;
+      line-height: 1.4;
+      cursor: default;
+      transition: color var(--transition), letter-spacing var(--transition);
+    }
+    .services .section__tag::after { display: none; }
+    .services .section__tag::before {
+      content: '';
+      flex: 0 0 auto;
+      width: 22px;
+      height: 2px;
+      background: var(--color-accent);
+      transition: width var(--transition), background var(--transition);
+    }
+    /* reacts to the pointer, but there is nothing to click */
+    .services .section__tag:hover { color: var(--color-primary); letter-spacing: 2.4px; }
+    .services .section__tag:hover::before { width: 40px; background: var(--color-primary); }
   </style>
 </head>
 <body class="page-inner page-services">
@@ -299,7 +336,7 @@
 
             <article class="stack-card" data-index="4" role="group" aria-labelledby="service-title-4">
               <div class="stack-card__image">
-                <img src="images/air-freight-v2.jpg" alt="Air freight services for international shipments" loading="lazy">
+                <img src="images/air-freight-services.jpg" alt="Wide-body cargo aircraft climbing after departure" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">05</span>
@@ -315,7 +352,7 @@
 
             <article class="stack-card" data-index="5" role="group" aria-labelledby="service-title-5">
               <div class="stack-card__image">
-                <img src="images/sea-freight.jpg" alt="Stacked shipping containers beside quay cranes at a port terminal" loading="lazy">
+                <img src="images/sea-freight.jpg" alt="Container yard and quay cranes at a deep-water port terminal" loading="lazy">
               </div>
               <div class="stack-card__content">
                 <span class="stack-card__number">06</span>

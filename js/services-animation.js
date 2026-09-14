@@ -9,6 +9,7 @@
   const SCROLL_PER_CARD = 640;
   const LERP_FACTOR = 0.16;
   const OVERLAP_PEEK = 18;
+  const TAIL = 420; // extra scroll after the last card lands, so it holds on screen
 
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
@@ -47,7 +48,7 @@
 
     function updateDimensions() {
       const cardHeight = getCardHeight();
-      const scrollHeight = SCROLL_PER_CARD * Math.max(cardCount - 1, 0) + window.innerHeight * 0.25;
+      const scrollHeight = SCROLL_PER_CARD * Math.max(cardCount - 1, 0) + window.innerHeight * 0.25 + TAIL;
 
       track.style.height = scrollHeight + 'px';
       stage.style.height = cardHeight + 'px';
@@ -60,7 +61,7 @@
     function computeTargetPosition() {
       const rect = track.getBoundingClientRect();
       const viewportAnchor = window.innerHeight * 0.42;
-      const scrollRange = rect.height - window.innerHeight * 0.25;
+      const scrollRange = rect.height - window.innerHeight * 0.25 - TAIL;
 
       if (scrollRange <= 0) return 0;
 

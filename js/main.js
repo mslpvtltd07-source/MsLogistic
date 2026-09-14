@@ -69,7 +69,7 @@
     },
     {
       title: 'Air Freight Services',
-      image: 'images/air-freight-v2.jpg',
+      image: 'images/air-freight-services.jpg',
       paragraphs: [
         'Our air freight services are ideal for clients who require fast, secure, and reliable international transportation of household goods. Every shipment is professionally packed, documented, and coordinated to ensure timely departure and smooth handling from origin to destination.',
         'From export packing and airline coordination to shipment tracking and final delivery, we manage the entire process with precision. Our experienced team ensures your belongings arrive safely while meeting international aviation and customs requirements.'

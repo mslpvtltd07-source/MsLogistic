@@ -168,6 +168,18 @@
     @media (max-width: 767px) {
       .projects .section__title { margin-top: 28px; }
     }
+
+    /* --- Nav centred, as on the homepage --- */
+    /* the homepage nav sits centred because a CTA balances it on the right.
+       With no CTA here, it is centred against the page instead. */
+    .header__container { position: relative; }
+    @media (min-width: 1024px) {
+      .header__nav {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
   </style>
 </head>
 <body class="page-inner">

@@ -12,10 +12,10 @@
   <meta property="og:image" content="images/freight-containers.jpg">
   <meta name="theme-color" content="#0B1F3A">
   <title>Why Choose Us | MS Logistics Private Limited</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B1F3A'/%3E%3Ctext x='50' y='68' font-family='Archivo,Arial' font-size='52' font-weight='800' fill='white' text-anchor='middle'%3EMS%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B1F3A'/%3E%3Ctext x='50' y='68' font-family='Poppins,Arial' font-size='52' font-weight='800' fill='white' text-anchor='middle'%3EMS%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
@@ -41,7 +41,8 @@
 
     /* --- Lede --- */
     .lede { padding: calc(var(--section-padding) * 1.15) 0 calc(var(--section-padding) * 0.5); }
-    .lede__head { grid-column: 1 / -1; max-width: 900px; margin: 0 auto; text-align: center; }
+    /* same offset as the About Us headline */
+    .lede__head { grid-column: 1 / -1; max-width: 900px; margin: 56px auto 0; text-align: center; }
     .lede__title {
       font-size: clamp(2.25rem, 6vw, 4.25rem);
       font-weight: 800;
@@ -147,6 +148,17 @@
       outline: none;
     }
     .row:hover::before, .row:focus-visible::before, .row.is-open::before { transform: scaleY(1); }
+
+    /* cards start hidden and fade in as the section arrives */
+    .manifest.is-in .row { animation: fadeRise 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) both; }
+    .manifest.is-in .row:nth-child(1) { animation-delay: 0.05s; }
+    .manifest.is-in .row:nth-child(2) { animation-delay: 0.14s; }
+    .manifest.is-in .row:nth-child(3) { animation-delay: 0.23s; }
+    .manifest.is-in .row:nth-child(4) { animation-delay: 0.32s; }
+    .manifest.is-in .row:nth-child(5) { animation-delay: 0.41s; }
+    .manifest.is-in .row:nth-child(6) { animation-delay: 0.50s; }
+    /* if the observer never fires, the cards must still be readable */
+    @media (scripting: none) { .row { opacity: 1; } }
     .row.is-open { background: rgba(216, 169, 94, 0.1); }
 
     .row__icon {
@@ -332,6 +344,7 @@
     .band.is-in .band__cell:nth-child(2) .band__cap { animation: fadeRise 0.6s ease 0.87s both; }
     .band.is-in .band__cell:nth-child(3) .band__cap { animation: fadeRise 0.6s ease 0.99s both; }
     @media (max-width: 767px) {
+      .lede__head { margin-top: 28px; }
       .band__grid { gap: 10px; }
       .band__cap { font-size: 0.625rem; letter-spacing: 0.02em; margin-top: 8px; }
     }
@@ -363,6 +376,96 @@
     /* closing block is now text only, so centre it */
     .close__inner { grid-column: 1 / -1 !important; text-align: center; }
     .close__text { margin-left: auto; margin-right: auto; max-width: 760px; }
+
+    /* --- Photos: pointer tilt and click to enlarge --- */
+    [data-zoom] { cursor: zoom-in; --rx: 0deg; --ry: 0deg; --lift: 0px; }
+    [data-zoom]:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+    .band__frame {
+      transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .band__cell:hover .band__frame { transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-6px); }
+    /* a gold corner bracket that draws in on hover */
+    .band__frame::after {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 26px;
+      height: 26px;
+      border-top: 2px solid var(--color-accent);
+      border-left: 2px solid var(--color-accent);
+      border-radius: 0;
+      opacity: 0;
+      transform: translate(-6px, -6px);
+      transition: opacity var(--transition), transform var(--transition);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .band__cell:hover .band__frame::after,
+    .band__frame:focus-visible::after { opacity: 1; transform: none; }
+    .band__cell:hover .band__cap { color: var(--color-primary); }
+    .band__cap { transition: color var(--transition); }
+
+    /* --- Lightbox --- */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5vh 5vw;
+      background: rgba(11, 31, 58, 0.92);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition);
+    }
+    .lightbox.is-open { opacity: 1; visibility: visible; }
+    .lightbox__figure { margin: 0; max-width: 100%; max-height: 90vh; text-align: center; }
+    .lightbox__img {
+      max-width: 100%;
+      max-height: 78vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      transform: scale(0.96);
+      transition: transform var(--transition);
+    }
+    .lightbox.is-open .lightbox__img { transform: none; }
+    .lightbox__cap {
+      margin-top: 16px;
+      font-size: 0.8125rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .lightbox__btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-white);
+      font-size: 1.25rem;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .lightbox__btn:hover { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-primary); }
+    .lightbox__btn--prev { left: 3vw; }
+    .lightbox__btn--next { right: 3vw; }
+    .lightbox__close { top: 4vh; right: 4vw; transform: none; }
+    @media (max-width: 767px) {
+      .lightbox__btn--prev { left: 8px; }
+      .lightbox__btn--next { right: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .band__frame, .lightbox, .lightbox__img { transition: none; }
+      [data-zoom] { --rx: 0deg !important; --ry: 0deg !important; }
+    }
   </style>
 </head>
 <body class="page-inner">
@@ -394,10 +497,12 @@
           <li><a href="about-us.html" class="header__link">About Us</a></li>
           <li><a href="services.html" class="header__link">Services</a></li>
           <li><a href="why-choose-us.html" class="header__link active">Why Choose Us</a></li>
+          <li><a href="clients.html" class="header__link">Clients</a></li>
           <li><a href="gallery.html" class="header__link">Gallery</a></li>
           <li><a href="contact.html" class="header__link">Contact</a></li>
         </ul>
       </nav>
+      <a href="contact.html" class="btn btn--primary header__cta">Work With Us</a>
       <button class="header__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
         <span></span>
         <span></span>
@@ -426,7 +531,7 @@
       <div class="container grid12">
         <div class="band__grid">
           <figure class="band__cell">
-            <div class="band__frame">
+            <div class="band__frame" data-zoom tabindex="0" role="button">
               <svg viewBox="0 0 1600 700" role="img" aria-label="Line drawing of stacked shipping containers under a gantry crane" preserveAspectRatio="xMidYMax slice">
             <g stroke="var(--ink)" fill="none" stroke-width="2">
               <path d="M0 585H1600" stroke="var(--rule)"/><path d="M60 585H1540"/>
@@ -456,14 +561,14 @@
             <figcaption class="band__cap">Bubble-wrapped and strapped on site.</figcaption>
           </figure>
           <figure class="band__cell">
-            <div class="band__frame">
+            <div class="band__frame" data-zoom tabindex="0" role="button">
               <img src="images/packing-carton.jpg" alt="Packer loading wrapped items into an export carton" onerror="this.classList.add('is-missing')" decoding="async" loading="lazy">
               <div class="curtain"></div>
             </div>
             <figcaption class="band__cap">Cushioned, itemised loading into cartons.</figcaption>
           </figure>
           <figure class="band__cell">
-            <div class="band__frame">
+            <div class="band__frame" data-zoom tabindex="0" role="button">
               <img src="images/packing-sealed.jpg" alt="Wrapped and sealed parcels packed ready for transit" onerror="this.classList.add('is-missing')" decoding="async" loading="lazy">
               <div class="curtain"></div>
             </div>
@@ -478,7 +583,7 @@
         <div class="manifest__intro">
           <h2 class="manifest__title" id="why-heading">Every relocation is different. The standard isn't.</h2>
           <p class="manifest__desc">We tailor each move to what's being shipped and where it's going. Every move combines export-grade packing materials, coordinated routing and a named contact who stays with the consignment from survey to delivery.</p>
-          <div class="manifest__media">
+          <div class="manifest__media" data-zoom tabindex="0" role="button">
           <svg viewBox="0 0 400 500" role="img" aria-label="Line drawing of a braced timber export crate with handling marks" preserveAspectRatio="xMidYMid slice" style="--len:1400">
             <g stroke="var(--ink)" fill="none" stroke-width="2">
               <rect data-draw x="46" y="84" width="308" height="332" fill="var(--object)"/>
@@ -666,6 +771,99 @@
           if (img.complete && img.naturalWidth === 0) img.classList.add('is-missing');
           img.addEventListener('error', function () { img.classList.add('is-missing'); });
         });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+  })();
+  </script>
+
+  <script>
+  (function () {
+    function init() {
+      var frames = [].slice.call(document.querySelectorAll('[data-zoom]'));
+      if (!frames.length) return;
+
+      var fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+      var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // the photo leans toward the pointer
+      if (fine && !still) {
+        frames.forEach(function (f) {
+          f.addEventListener('pointermove', function (e) {
+            var r = f.getBoundingClientRect();
+            var x = (e.clientX - r.left) / r.width - 0.5;
+            var y = (e.clientY - r.top) / r.height - 0.5;
+            f.style.setProperty('--ry', (x * 6).toFixed(2) + 'deg');
+            f.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg');
+          });
+          f.addEventListener('pointerleave', function () {
+            f.style.setProperty('--ry', '0deg');
+            f.style.setProperty('--rx', '0deg');
+          });
+        });
+      }
+
+      // build the viewer once
+      var box = document.createElement('div');
+      box.className = 'lightbox';
+      box.setAttribute('role', 'dialog');
+      box.setAttribute('aria-modal', 'true');
+      box.setAttribute('aria-label', 'Photo viewer');
+      box.innerHTML =
+        '<button class="lightbox__btn lightbox__close" type="button" aria-label="Close">&times;</button>' +
+        '<button class="lightbox__btn lightbox__btn--prev" type="button" aria-label="Previous photo">&larr;</button>' +
+        '<figure class="lightbox__figure"><img class="lightbox__img" alt=""><figcaption class="lightbox__cap"></figcaption></figure>' +
+        '<button class="lightbox__btn lightbox__btn--next" type="button" aria-label="Next photo">&rarr;</button>';
+      document.body.appendChild(box);
+
+      var img = box.querySelector('.lightbox__img');
+      var cap = box.querySelector('.lightbox__cap');
+      var current = 0, lastFocus = null;
+
+      function captionFor(f) {
+        var fig = f.closest('figure');
+        var c = fig && fig.querySelector('.band__cap');
+        if (c) return c.textContent;
+        var i = f.querySelector('img');
+        return i ? i.getAttribute('alt') || '' : '';
+      }
+      function show(i) {
+        current = (i + frames.length) % frames.length;
+        var source = frames[current].querySelector('img');
+        if (!source) return;
+        img.src = source.currentSrc || source.src;
+        img.alt = source.alt || '';
+        cap.textContent = captionFor(frames[current]);
+      }
+      function open(i) {
+        lastFocus = document.activeElement;
+        show(i);
+        box.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        box.querySelector('.lightbox__close').focus();
+      }
+      function close() {
+        box.classList.remove('is-open');
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+
+      frames.forEach(function (f, i) {
+        f.addEventListener('click', function () { open(i); });
+        f.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+        });
+      });
+      box.querySelector('.lightbox__close').addEventListener('click', close);
+      box.querySelector('.lightbox__btn--prev').addEventListener('click', function () { show(current - 1); });
+      box.querySelector('.lightbox__btn--next').addEventListener('click', function () { show(current + 1); });
+      box.addEventListener('click', function (e) { if (e.target === box) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (!box.classList.contains('is-open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowRight') show(current + 1);
+        else if (e.key === 'ArrowLeft') show(current - 1);
+      });
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
     else init();

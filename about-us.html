@@ -190,7 +190,12 @@
       .about__promise { grid-column: 1 / -1; }
     }
     @media (max-width: 767px) {
-      .about__headline { margin-top: 28px; }
+      .about__headline {
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      font-weight: 750;
+      line-height: 1.4;
+
+    }
       .about__mission { grid-template-columns: 1fr; }
       .about__promise { grid-column: auto; }
     }
